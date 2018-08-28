@@ -1,0 +1,46 @@
+<html>
+<head>
+    <title>Home Page</title>
+    <link rel="stylesheet" type="text/css" href="home.css">
+</head>
+
+
+<body>
+<ul>
+    <li><a href="home.asp">Home</a></li>
+    <li><a href="pref.asp">Preferences</a></li>
+    <li><a href="cont.asp">Contact</a></li>
+
+    <div id="container">
+        <button type="submit" onclick=APICall()>Click</button>
+    </div>
+
+    
+</ul>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<script type="text/javascript">
+    function APICall()
+    {
+        $(document).ready(function(){
+        var url = 'https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=36f720b2539b4900bcfef79c06fe699b';
+        $.getJSON(url).then(function(res){
+            console.log(res) //{status: "ok", source: "fox-sports", sortBy: "top", articles: Array[10]}
+            console.log(res['status']) //ok
+            console.log(res['articles'].length) //10
+        })
+    })
+    }
+</script>
+
+
+
+</body>
+
+
+
+
+
+
+</html>

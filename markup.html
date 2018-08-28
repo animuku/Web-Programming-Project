@@ -1,0 +1,45 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="login.css">
+</head>
+
+<body>
+<h1 align="center" style:"color:magenta">News Website</h1>
+<div id="container">
+<form name="loginform" action="home.html" onSubmit="return formvalidate()" method="post" >
+	<label for="username">Username:</label>
+    <input type="text" id="username" name="username">
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password">
+	<div id="lower">
+		<input type="checkbox">
+		<label for="checkbox">Keep me logged in</label>
+		<button type="submit">Login</button>	
+	</div>
+</form>
+</div>
+
+<script type="text/javascript">
+	function formvalidate(){
+		var username=document.forms["loginform"]["username"].value;
+		var password=document.forms["loginform"]["password"].value;
+
+		var pwdpattern=/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+
+		var result= pwdpattern.test(password);
+
+		if (username == "") {
+        	alert("Name must be filled out");
+        	return false;
+    	}
+
+		if(!result)
+		{
+			alert("Wrong password");
+			return false;
+		}
+	}
+
+</script>
+</body>
+</html>
