@@ -1,0 +1,22 @@
+<script type="text/javascript">
+	function formvalidate(){
+		var username=document.forms["loginform"]["username"].value;
+		var password=document.forms["loginform"]["password"].value;
+
+		var pwdpattern=/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+
+		var result= pwdpattern.test(password);
+
+		if (username == "") {
+        	alert("Name must be filled out");
+        	return false;
+    	}
+
+		if(!result)
+		{
+			alert("Wrong password");
+			return false;
+		}
+	}
+
+</script>
