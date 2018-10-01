@@ -10,17 +10,21 @@
     function APICall()
     {
         $(document).ready(function(){
-        var url = 'https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=36f720b2539b4900bcfef79c06fe699b';
+        var url = 'https://newsapi.org/v2/top-headlines?country=us&pageSize=10&category=general&apiKey=36f720b2539b4900bcfef79c06fe699b';
+        var i=0;
         $.getJSON(url).then(function(res){
             console.log(res) //{status: "ok", source: "fox-sports", sortBy: "top", articles: Array[20]}
             console.log(res['status']) //ok
             console.log(res['articles'].length) //20
-            document.write("<p>"+res['articles'][0]['author']+"</p>")
-            document.write("<p>"+res['articles'][0]['title']+"</p>")
-            document.write("<p>"+res['articles'][0]['description']+"</p>")
-            document.write("<a href=")
-            document.write(res['articles'][0]['url'])
-            document.write(">"+res['articles'][0]['url']+"</a>")
+            for(i=0;i<10;i++)
+            {
+                document.write("<img src='"+res['articles'][i]['urlToImage']+"'>")
+                document.write("<p>"+res['articles'][i]['title']+"</p>")
+                document.write("<p>"+res['articles'][i]['description']+"</p>")
+                document.write("<a href=")
+                document.write(res['articles'][i]['url'])
+                document.write(">"+res['articles'][i]['url']+"</a>")
+            }
         })
     })
     }
