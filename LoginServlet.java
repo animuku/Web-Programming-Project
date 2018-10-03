@@ -5,23 +5,23 @@ import java.util.*;
 
 public class LoginServlet extends HttpServlet {
 
- public void doPost(HttpServletRequest req, 
-  HttpServletResponse res) 
+ public void doPost(HttpServletRequest request, 
+  HttpServletResponse response) 
   throws ServletException, IOException {
 
-    String uname=req.getParameter("username");
-    String pwd=req.getParameter("password");
+    String uname=request.getParameter("username");
+    String pwd=request.getParameter("password");
     res.setContentType("text/html");
     PrintWriter out=res.getWriter();
 
     if(uname.equals("animuku")&& pwd.equals("Drogbalamp123"))
     {
-        res.sendRedirect("src/home.html");
+        response.sendRedirect("target.html");
     }
 
     else{
         out.println("Invalid username or password");
-        RequestDispatcher rs=req.getRequestDispatcher("src/markup.html");
+        RequestDispatcher rs=req.RequestDispatcher("markup.html");
         rs.forward(req,res);
     }
 
