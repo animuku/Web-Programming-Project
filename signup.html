@@ -1,0 +1,56 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="sign.css">
+</head>
+
+<body>
+
+
+<h1 align="center" style:"color:magenta">News Website</h1>
+<div id="container">
+<form name="loginform" action="registration.jsp" method="post" onsubmit="return validateForm()">
+	<label for="username">Username:</label>
+    <input type="text" id="username" name="username">
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email">
+    <label for="phone">Phone:</label>
+    <input type="number" id="phone" name="phone">
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password">
+	<div id="lower">
+		<button type="submit">Sign Up</button>	
+	</div>
+</form>
+</div>
+
+
+
+<script>
+	function validateForm() {
+    	var uname = document.forms["loginform"]["username"].value;
+    	var pwd = document.forms["loginform"]["password"].value;
+        var phoneno = document.forms["loginform"]["phone"].value;
+        var email = document.forms["loginform"]["email"].value;
+    	var pwdpattern=/(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}/;
+        var phonenopattern = /^\d{10}$/;
+        var emailpattern = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    	var result= pwdpattern.test(pwd);
+    	if (uname == "") {
+        	alert("Name must be filled out");
+        	return false;
+    	}
+    	if (!result) {
+            alert("Wrong Password");
+        }
+        if(!(phoneno.match(phonenopattern))) {
+            alert("Wrong phone number");
+        }
+        if(!(email.match(emailpattern))) {
+            alert("Wrong email");
+        }
+	}
+</script>
+
+
+</body>
+</html>
