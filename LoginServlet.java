@@ -2,29 +2,56 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.*;
 import java.util.*;
-
+import java.sql.*;
 public class LoginServlet extends HttpServlet {
 
- public void doPost(HttpServletRequest request, 
-  HttpServletResponse response) 
+ public void doPost(HttpServletRequest req, 
+  HttpServletResponse res) 
   throws ServletException, IOException {
 
-    String uname=request.getParameter("username");
-    String pwd=request.getParameter("password");
+    String uname=req.getParameter("username");
+    String pwd=req.getParameter("password");
     res.setContentType("text/html");
     PrintWriter out=res.getWriter();
 
-    if(uname.equals("animuku")&& pwd.equals("Drogbalamp123"))
+try{
+    DriverManager.registerDriver(new com.mysql.jdbc.Driver ());
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/test",
+            "root", "");
+    
+    Statement st = con.createStatement();
+    String str="select username,password from registration where username='"+uname+"'";
+
+    ResultSet rs1=st.executeQuery(str);
+
+    if (!rs1.isBeforeFirst() ) {    
+        out.println("No data"); 
+    }
+    else 
     {
-        response.sendRedirect("target.html");
-    }
+        rs1.next();
+        String username=rs1.getString("username");
+        String password=rs1.getString("password");
 
-    else{
-        out.println("Invalid username or password");
-        RequestDispatcher rs=req.RequestDispatcher("markup.html");
-        rs.forward(req,res);
-    }
+        if(uname.equals(username)&& pwd.equals(password))
+        {
+            res.sendRedirect("src/home.html");
+        }
+    
 
+
+        else{
+            out.println("Invalid username or password");
+            RequestDispatcher rs=req.getRequestDispatcher("src/markup.html");
+            rs.forward(req,res);
+            }
+        }
+    }
+        
+catch(SQLException ex)
+{
+    out.println(ex);
+}
 
  }
 }
